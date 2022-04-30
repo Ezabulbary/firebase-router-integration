@@ -3,7 +3,6 @@ import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import React from 'react';
 
-
 const RequireAuth = ({children}) => {
     let [user] = useAuthState(auth)
     let location = useLocation();

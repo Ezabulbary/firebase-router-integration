@@ -1,14 +1,17 @@
 import React from 'react';
-import useFirebase from '../../hooks/useFirebase';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import './Registers.css';
 
 const Register = () => {
-    const {signInWithGoogle} = useFirebase();
+    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+
     return (
         <div className='registers'>
             <h1>Please Register</h1>
             <button className='btn'>Github</button>
-            <button onClick={signInWithGoogle} className='btn'>Google</button>
+            <button onClick={() => signInWithGoogle()} className='btn'>Google</button>
             <button className='btn'>Facebook</button>
             <form>
                 <input type="text" name="name" id="name" placeholder='Type Your Name'/>
@@ -18,6 +21,8 @@ const Register = () => {
                 <input type="password" name="password" id="password" placeholder='Type Your Password'/>
                 <br />
                 <input type="password" name="confirm-password" id="confirm-password" placeholder='Confirm Your Password'/>
+                <br />
+                <Link to='/login'>Already have an Account?</Link>
                 <br />
                 <button className='register-btn'>Register</button>
             </form>
