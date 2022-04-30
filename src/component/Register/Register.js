@@ -1,17 +1,29 @@
 import React from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import './Registers.css';
 
 const Register = () => {
-    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location?.state?.from?.pathname || "/";
+
+    const handleGoogleSignUp = () => {
+        signInWithGoogle()
+            .then(() => {
+                navigate(from, { replace: true });
+            })
+    }
+
 
     return (
         <div className='registers'>
             <h1>Please Register</h1>
             <button className='btn'>Github</button>
-            <button onClick={() => signInWithGoogle()} className='btn'>Google</button>
+            <button onClick={handleGoogleSignUp} className='btn'>Google</button>
             <button className='btn'>Facebook</button>
             <form>
                 <input type="text" name="name" id="name" placeholder='Type Your Name'/>
