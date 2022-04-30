@@ -13,7 +13,6 @@ const Header = () => {
                 <Link to='/products'>Products</Link>
                 <Link to='/orders'>Orders</Link>
                 <Link to='/register'>Register</Link>
-                <span className='header-user'>{user?.displayName}</span>
                 {
                     user?.uid 
                     ?
@@ -21,6 +20,8 @@ const Header = () => {
                     :
                     <Link to='/login'>Login</Link>
                 }
+
+                <span className='header-user'>{user?.displayName}</span>
             </nav>
         </div>
     );
